@@ -58,7 +58,41 @@ This continues until the loop termination condition
 
 Performance: O(n)  
 
+**Problem2:**  
+Given an string array, find the smallest substring that contains k distinct chars  
 
+Ex1: {'p','a','p','c','d','f','g','a','p','a'}  
+k=3  
+Output: {1,3}  
+
+Ex2: {'p','p','p','c','p','f','g','a','p','a'} 
+k=3  
+Output: {3,5}  
+
+Ex3: {'p','p','p','c','p','f','g','a','p','a'} 
+k=0  
+Output: {0,-1}    
+
+**Solution Description**  
+- Flexible-Size Sliding Window  
+- Initialize HashMap that contains chars and their associated counts for the running window    
+- Initialize smallestWindowleftPtr to 0 and smallestWindowrightPtr to -1  
+-- //smallestWindowrightPtr = -1 is a marker for the condition where k distinct chars were NOT found  
+- Initialize left-pointer to 0 and right-pointer to -1  
+-- //right-pointer is initialized to -1 so that in the while (true) loop, we are able to start from (0,0) window  
+- In a while (true) loop  
+-- Check if the right-pointer can be incremented  
+-- If false, break the loop  
+-- If true, increment the pointer  
+-- Add right-pointer index element to HashMap 
+-- Check if there are k distinct elements in the Map  
+--- If true, trim the window from the left and if the window size is less than the current minWindow, replace minWindow with the current one    
+---- Advance the left-pointer, and ensure to reflect this in the HashMap, by decrementing the counter (if > 1) or removing the char (if count is 1)  
+
+Return of result with window (0,-1) indicates no match found  
+Return of result with window (>=0, >=0) contains window pointers for the smallest window that contains the k distinct chars  
+
+ 
         
 
 
