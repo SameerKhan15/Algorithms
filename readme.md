@@ -92,6 +92,22 @@ Output: {0,-1}
 Return of result with window (0,-1) indicates no match found  
 Return of result with window (>=0, >=0) contains window pointers for the smallest window that contains the k distinct chars  
 
+**Problem3:**  
+Given an string array, find the longest substring without repeating chars  
+
+Ex1: {'p', 'a', 'p', 'c', 'd', 'f', 'g', 'a', 'p', 'a'}   
+Output: {1,6}  
+
+Ex2: {'p', 'p', 'p', 'd','l'}  
+Output: {2,4}  
+
+**Solution Description**  
+- Flexible-Size Sliding Window  
+- HashSet for detecting dupes  
+- In while (true) loop  
+-- Until (or unless) a dupe is detected, keep advancing the window, AND if the current window is > current-max-window, advance the current-max-window  
+-- If a dupe is detected, the current window terminates.  If the terminated window is > current-max-window, reset the current-max-window accordingly    
+--- In order to configure a new window, shrink the current window from the left pointer until the dupe char is eliminated.   
  
         
 
