@@ -109,6 +109,37 @@ Output: {2,4}
 -- If a dupe is detected, the current window terminates.  If the terminated window is > current-max-window, reset the current-max-window accordingly    
 --- In order to configure a new window, shrink the current window from the left pointer until the dupe char is eliminated.   
  
-        
+**Problem4:**  
+Given an integer array where index location represents a tree and index value represents fruit type, find the max number of fruits in a contiguous set of trees, such that each of the k baskets do NOT hold more than single fruit type. For a given fruit type, the basket can hold as many fruits as possible.  
+
+Ex1: {0,0,2,2,3,4,4,4,5}  
+k=2    
+Output: {0,3} //4 fruits  
+
+Ex2: {0,1,2,2,3,4,4,4,5}  
+k=2  
+Output: {4,7} //4 fruits  
+
+Ex3: {0,1,1,1,1,1,1,1,8}  
+k=3  
+Output: {0,8}  //8 fruits  
+
+**Solution Description**  
+- Flexible-Size Sliding Window  
+- HashMap for fruit_type -> fruits count mapping  
+- Initialize lPtr to 0 and rPtr to -1  
+- Initialize maxWindowlPtr and maxWindowrPtr to 0  
+- In while (true) loop  
+-- IF the rPtr+1 exceeds the array length, terminate the loop  
+-- IF the fruit-type already exists in the collection, increment the count. Compare the current running window with the max-window and if the former is greater, set the max-window to the current-window coordinates  
+-- IF the fruit-type does NOT exists in the collection  
+--- IF the collection already reached max fruit type limit, terminate the current window. Compare the current running window with the max-window and if the former is greater, set the max-window to the current-window coordinates. Additionally, shrink the current window from the left until the 'max fruit-type reached violation' is corrected.  Add the new fruit type to the collection.  
+--- If the collection has NOT reached the limit, add the fruit to the collection.  Compare the current running window with the max-window and if the former is greater, set the max-window to the current-window coordinates  
+
+ 
+
+
+
+
 
 
