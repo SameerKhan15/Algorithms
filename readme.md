@@ -136,7 +136,31 @@ Output: {0,8}  //8 fruits
 --- IF the collection already reached max fruit type limit, terminate the current window. Compare the current running window with the max-window and if the former is greater, set the max-window to the current-window coordinates. Additionally, shrink the current window from the left until the 'max fruit-type reached violation' is corrected.  Add the new fruit type to the collection.  
 --- If the collection has NOT reached the limit, add the fruit to the collection.  Compare the current running window with the max-window and if the former is greater, set the max-window to the current-window coordinates  
 
- 
+**Problem5:**  
+Find anagrams in a given string.  
+
+Ex1: s = {'c','b','a','e','b','a','b','a','c','d'}  //target string
+	 a = {a,b,c} //anagram chars    
+Output: [0,2], [6,8] //all index boundaries of the anagrams in string s 
+
+Ex2: s = {'c','b','a','b','c','e','b','z','b','a','c','d'}  
+	 a = {a,c,b}  
+Output: [0,2], [2,4], [8,10]  
+
+**Solution Description**  
+- Flexible-Size Sliding Window  
+- A HashSet for storing anagram characters
+- A HashSet for storing anagram characters found in the running window  
+- A List containing boundaries of all the anagrams found  
+- Initialize lPtr to 0 and rPtr to -1  
+- In while (true) loop  
+-- IF the rPtr+1 exceeds the array length, terminate the loop  
+-- IF chars[rPtr] has a match in the anagram set  
+--- IF the running window set does NOT contain the char, add it to the set   
+--- IF the running window set does contain the char, we have a dupe. shrink the window from the left side (along with removing from the current window HashSet) until the dupe is resolved.  
+--- IF the current window set is equal in size to anagram set, we have a match and therefore record it. Increment the left-pointer (and remove the char from the current window set)  
+-- IF the chars[rPtr] does NOT have a match, terminate the current window. Initialize a new current window HashSet, and advance the lPtr to rPtr+1 (if not out of bound)  
+--- //we are starting a brand new window here  
 
 
 
