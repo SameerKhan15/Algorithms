@@ -162,6 +162,53 @@ Output: [0,2], [2,4], [8,10]
 -- IF the chars[rPtr] does NOT have a match, terminate the current window. Initialize a new current window HashSet, and advance the lPtr to rPtr+1 (if not out of bound)  
 --- //we are starting a brand new window here  
 
+**Problem6:**  
+Minimum Window Substring  
+Given two strings s and t, return min window substring of s such that every char in t (including duplicates) are present in s. If no substring match, return ""  
+
+Ex1: s = {ADOBECODEBANC}  
+     t = {ABC}  
+Output: {BANC}  
+
+**Solution Description**  
+ 
+Variables  
+- minWindowLPtr, minWindowRPtr  
+- currWindowLPtr, currWindowRPtr  
+- reqdCharsCount // sum of char instances across string t  
+- currWindowCharsCount  
+- Map<Character, Integer> for s and t  
+- In while (true) loop  
+-- IF currWindowRPtr == s.length, break the loop  
+-- incr currWindowRPtr  
+-- Update s map for s[currWindowRPtr] char, if exists in map t  
+-- Update currWindowCharsCount if s[currWindowRPtr] exists in map t AND the current count (in map s) is < the required count (in map t)  
+-- Perform window match check, by comparing equality between currWindowRPtr and reqdCharsCount  
+-- IF match occurs, perform the following logic  
+--- If the current (matched) window is < minWindow, replace minWindow coodrinates with the current window values  
+--- We are done with the current window. Next step is to setup the left-pointer to start a new window. This is a two-step process  
+--- Initial shrink of the window (from the left) by char 1  
+--- If the s[currWindowlPtr] count (in map s) is <= the required count (in map t), decrement the currWindowCharsCount because after shifting the left-pointer, the count will fall below the required threshold  
+--- Decr the counter associated with s[currWindowlPtr] by 1, in map s  
+--- Increment currWindowlPtr  
+--- Since this shrink window can result in a match, perform the window match check (exactly as described above)  
+--- Perform subsequent shrink of the window, to remove any "bloat"  
+--- Example1: {.DOBEC} is the string after initial shrink, we can shrink the window by skipping D and O, since we do not have these chars in the set t  
+--- Example2: {.AABEC} is the string after initial shrink, we can shrink the window by skipping the 2nd A too, because we only need single A  
+--- Subsequent shrinking logic  
+--- If s[currWindowlPtr] exists in map t and its count is <= required count, we canNOT shrink the window. Break the loop  
+--- If s[currWindowlPtr] exists in map t and its count is > required count, decr the count in map s and incr currWindowlPtr  
+--- If s[currWindowlPtr] does NOT exists in map t, incr currWindowlPtr  
+--- Check for the match  
+--- Examples  
+--- {A[0]DOBEC[5] 0DEBANC} // current window 0 - 5 after an expansion    
+--- We have a match#1. Record this as min match (if applicable)  
+--- Shrink the left-pointer by 1, as a prep to setup the left-pointer for a new (sliding) window  
+--- {AD[1]OBEC[5] ODEBANC} // current window 1 - 5 after the initial shrink  
+...  
+[Further details of the algorithm](https://www.evernote.com/shard/s80/sh/2d5ed7a9-1538-4f22-9e65-ae90fddac546/Y4GynS0HvJwO3EnsuGjkf331jnKWr3Mq-dnfYabk9WxQc8kEwpm236kuoA)   
+
+
 
 
 
