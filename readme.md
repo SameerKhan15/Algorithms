@@ -208,9 +208,22 @@ Variables
 ...  
 [Further details of the algorithm](https://www.evernote.com/shard/s80/sh/2d5ed7a9-1538-4f22-9e65-ae90fddac546/Y4GynS0HvJwO3EnsuGjkf331jnKWr3Mq-dnfYabk9WxQc8kEwpm236kuoA)   
 
+**Problem7:**  
+Find Median from Data Stream  
 
+Ex1: int[] array = {-1, 2, 6, 4, 3}  
+     window-size = 3  
+Output: {2, 4, 4}  
 
+**Solution Description**  
 
+- Option1 is to sort the elements, within each (sliding) window, and compute the median. This would be functionally correct but not perf optimal. It would incur O(N*K(logK)) time. Furthermore, we will sort almost already sorted window, upon each slide  
+- Option2 is better where we use two binary heaps  
+- Max heap would contain the lower half of the window and Min heap would contain the upper half of the window  
+- Upon each slide, we would remove the left-most window element and add the new (right-most) element   
+- O(N * log(K))  
+- N = number of elements in the int[] arr  
+- K = window size  
 
 
 
