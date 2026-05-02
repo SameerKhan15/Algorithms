@@ -2,6 +2,7 @@ package string.manipulation;
 
 public class SubstringMatch {
 	/*
+	 * Author: Sameer Khan
 	 * Using Rolling Hash Algorithms. See the attached README for details on the algorithm
 	 */
 	private static int BASE = 257;

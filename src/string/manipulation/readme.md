@@ -1,3 +1,5 @@
+#Author: Sameer Khan
+
 # Rolling Hash Algorithms (used in SubstringMatch problem)
 ## Overview  
 We want to find occurrences of a pattern (keyword) in a string using efficient techniques.

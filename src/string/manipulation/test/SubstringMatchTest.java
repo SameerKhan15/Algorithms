@@ -6,6 +6,7 @@ import org.junit.Test;
 import string.manipulation.SubstringMatch;
 
 /*
+ * Author: Sameer Khan
  * Unit tests for SubstringMatch.findIndex()
  * 
  * Test categories:
