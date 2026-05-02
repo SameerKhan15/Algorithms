@@ -6,4 +6,5 @@
  *
  */
 module Algorithms {
+	requires junit;
 }
