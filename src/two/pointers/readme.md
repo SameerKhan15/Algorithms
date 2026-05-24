@@ -33,5 +33,56 @@ lPtr >= rPtr, Stop, Pointers have met; all positions processed
 #### Boundary Wall Exclusion  
 The two boundary walls (index 0 and index wallsHeight.length - 1) never contribute water — they are the outermost enclosing walls and water cannot be retained beyond them. This is enforced by the lPtr != 0 and rPtr != 0 guards before accumulating water.  
 
+## Array Intersection - Algorithm Description  
+Utility class that finds the common elements between two sorted integer arrays using a linear two-pointer scan.  
 
-       
+### Overview
+
+`ArrayIntersection` exposes a single static method, `computeIntersection`, which returns all elements present in both input arrays. The result preserves ascending order and honours duplicate values up to the lesser frequency across the two arrays.
+
+**Precondition:** Both arrays must be sorted in non-decreasing order before calling this method. Unsorted input produces undefined behaviour.
+
+### Algorithm  
+The method uses a **two-pointer** technique that exploits the sorted order of both inputs.
+
+```
+leftPtr  → index into arr1  (starts at 0)
+rightPtr → index into arr2  (starts at 0)
+```
+
+At each iteration:
+
+1. **Match** — `arr1[leftPtr] == arr2[rightPtr]`: add the value to the result; advance both pointers.
+2. **Left smaller** — `arr1[leftPtr] < arr2[rightPtr]`: advance `leftPtr` only (the smaller value cannot appear later in the sorted `arr2`).
+3. **Right smaller** — otherwise: advance `rightPtr` only (symmetric reason).
+
+The loop terminates when either pointer reaches the end of its array.
+
+### Complexity
+
+| Dimension | Bound |
+|-----------|-------|
+| Time      | O(n + m) — where `n = arr1.length`, `m = arr2.length` |
+| Space     | O(min(n, m)) — worst-case result size |  
+
+### Usage Examples
+
+```java
+int[] a = {1, 2, 3};
+int[] b = {1, 3, 5};
+int[] result = ArrayIntersection.computeIntersection(a, b);
+// result → [1, 3]
+```
+```java
+int[] a = {1, 3, 5};
+int[] b = {2, 4, 6};
+int[] result = ArrayIntersection.computeIntersection(a, b);
+// result → []
+```
+
+### Known Limitations
+
+- **Sort order not enforced** — both arrays must be sorted before calling this method. No validation is performed; unsorted input silently produces incorrect results.
+- **Primitive `int` only** — the method does not support generics or other numeric types.
+- **No in-place operation** — always allocates a new array for the result.
+---
